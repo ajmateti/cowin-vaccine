@@ -19,7 +19,6 @@ def make_request(district='596'):
         'authority': 'cdn-api.co-vin.in',
         'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
         'accept': 'application/json, text/plain, */*',
-        'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiI2MDVkYmFhMi1iODA2LTQzNzEtOGIxYy02YTE2YjBmZmIyYWUiLCJ1c2VyX2lkIjoiNjA1ZGJhYTItYjgwNi00MzcxLThiMWMtNmExNmIwZmZiMmFlIiwidXNlcl90eXBlIjoiQkVORUZJQ0lBUlkiLCJtb2JpbGVfbnVtYmVyIjo4MDA4NDI0MTQ4LCJiZW5lZmljaWFyeV9yZWZlcmVuY2VfaWQiOjEzNDE3MTc5MTI2MTQsInNlY3JldF9rZXkiOiJiNWNhYjE2Ny03OTc3LTRkZjEtODAyNy1hNjNhYTE0NGYwNGUiLCJzb3VyY2UiOiJjb3dpbiIsInVhIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzkwLjAuNDQzMC4yMTIgU2FmYXJpLzUzNy4zNiIsImRhdGVfbW9kaWZpZWQiOiIyMDIxLTA1LTI5VDE0OjQ4OjEyLjMzN1oiLCJpYXQiOjE2MjIyOTk2OTIsImV4cCI6MTYyMjMwMDU5Mn0.foMoOUbG7Ye0f5_oQnwhoV-_a6wDyFdwpjQdk0jYO6w',
         'sec-ch-ua-mobile': '?0',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
         'origin': 'https://selfregistration.cowin.gov.in',
