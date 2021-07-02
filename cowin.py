@@ -5,7 +5,6 @@ import os
 from email_sender import send_email
 
 
-available_slots = []
 
 def get_date():
     from datetime import date
@@ -34,7 +33,6 @@ def make_request(district='596'):
         ('district_id', district),
         ('date', date),
     )
-
     response = requests.get('https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict', headers=headers, params=params)
     return response
 
@@ -53,8 +51,7 @@ def get_capacity(session):
         return True, capacities
     return False, capacities
 
-def check(district):
-    global available_slots
+def check(available_slots, district):
     response = get_response(district)
     if response:
         centers = response.get('centers')
@@ -92,27 +89,27 @@ def get_formatted_message(slots):
         message+= f'{name}, {address}, {district}\n {date}\n {capacity}\n Age Limit: {age}\n Vaccine: {vaccine}\n\n'
     return message
 
-def filter_slots(vaccine = None, age = None, dose= None):
-    global available_slots
-    ret = available_slots
+def filter_slots(available_slots, vaccine = None, age = None, dose= None):
+    ret  = available_slots
     if vaccine:
         ret = filter( lambda x: x['vaccine']==vaccine, ret)
     if age:
         ret = filter( lambda x: x['age']<=age, ret)
     if dose:
-        ret = filter( lambda x: x['capacity'][dose]>0, ret)
+        ret = filter( lambda x: x['capacity'][dose]>50, ret)
     return list(ret)
 
 
 def main():
-    global available_slots
-    check(district = '581')
-    check(district = '596')
+    available_slots = []
+    check(available_slots, district = '581')
+    check(available_slots, district = '596')
+    print(available_slots)
     lambda_response = []
     for age in [18,45]:
         for vaccine in ['COVISHIELD', 'COVAXIN']:
             for dose in [1,2]:
-                x = filter_slots(vaccine=vaccine, age=age, dose=dose)
+                x = filter_slots(available_slots, vaccine=vaccine, age=age, dose=dose)
                 name = f'{vaccine}_{age}_{dose}'
                 if os.getenv(name) is not None and x:
                     lambda_response.append(f'{name} found. Sending Mail.')
@@ -124,6 +121,7 @@ def main():
                 elif os.getenv(name):
                     lambda_response.append(f'{name} found. But nothing to update.')
     return lambda_response
+
 
 def lambda_handler(event, context):
     response = main()
